@@ -2,15 +2,15 @@ package Day3_4;
 
 import java.util.Scanner;
 
-public class ToString {
+public class BaiTap3Day1 {
     public static void main(String[] args) {
-        int day;
-        int day2;
-        int day3;
         Scanner number = new Scanner(System.in);
         System.out.println("Nhập ngày muốn đổi:");
-        day = number.nextInt();
-        switch (day / 100) {
+       int day = number.nextInt();
+        int day1 =(day / 100);
+        int day2 = (day % 100)/10;
+        int day3 = (day % 10);
+        switch (day1) {
             case 1:
                 System.out.println("One hunder");
                 break;

@@ -15,7 +15,7 @@ package Day4_4;
 //    }
 //}
 //100 Snt đầu tiên
-public class Baitap3 {
+public class BaiTap3Day2 {
 
     public static void main(String[] args) {
         int count = 0;
