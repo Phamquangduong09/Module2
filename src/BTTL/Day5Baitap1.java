@@ -71,8 +71,5 @@ public class Day5Baitap1 {
                 ", hoa=" + hoa +
                 '}';
     }
-    public static Day5Baitap1 student(){
-        String ten = s
-    }
 
 }

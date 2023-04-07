@@ -2,7 +2,7 @@ package BTTL;
 
 import java.util.Scanner;
 
-public class DayBaiTap1_Main {
+public class Day5BaiTap1_Main {
     public static void main(String[] args) {
 //        Day5Baitap1 students1 = new Day5Baitap1("Duong", 24, 8, 7, 10);
 //        Day5Baitap1 students2 = new Day5Baitap1("Thai", 24, 10, 10, 10);
@@ -40,8 +40,5 @@ public class DayBaiTap1_Main {
         }
 
 
-    }
-    public static Day5Baitap1 students(){
-        String ten = Scanner
     }
 }
