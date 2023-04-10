@@ -1,5 +1,6 @@
 package BTTL;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class DemoProduct {
@@ -17,13 +18,13 @@ public class DemoProduct {
         for (int i = 0; i < products.length; i++) {
             products[i] = Product.getProduct();
         }
-        for (int i = 0; i < products.length; i++) {
-            System.out.println(products[i]);
-        }
+//        for (int i = 0; i < products.length; i++) {
+////            System.out.println(products[i]);
+//        }
+        sort(products);
         System.out.println("Tổng tất cả các giá tiền là :" + sum(products));
         search(products);
         delete(products);
-        sort(products);
         edit(products);
     }
 
@@ -51,7 +52,7 @@ public class DemoProduct {
             System.out.println("không tìm thấy");
         }
         System.out.println(products[index]);
-        ;
+
     }
 
     public static void delete(Product[] products) {
@@ -86,16 +87,15 @@ public class DemoProduct {
         }
     }
 
-    public static void edit(Product[]products){
+    public static void edit(Product[] products) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("nhập id sản phẩm bạn muốn sửa:");
         int edit = scanner.nextInt();
         for (int i = 0; i < products.length; i++) {
-            if(edit==products[i].getId()){
-                products[i]=Product.getProduct();
+            if (edit == products[i].getId()) {
+                products[i] = Product.getProduct();
             }
-
         }
-
+        System.out.println(Arrays.toString(products));
     }
 }
