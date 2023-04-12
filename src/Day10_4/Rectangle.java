@@ -1,6 +1,6 @@
 package Day10_4;
 
-public class Rectangle implements Resizeable{
+public class Rectangle extends HinhHoc implements Resizeable {
     private double height;
     private double width;
     private String color;
@@ -38,11 +38,12 @@ public class Rectangle implements Resizeable{
         this.color = color;
     }
 
+    public double getArea() {
+        return height * width;
+    }
+
     @Override
     public void resize(double percent) {
-        this.height=percent;
-        this.width = percent;
-        this.color = "black";
-
+        System.out.println(getArea() * percent);
     }
 }

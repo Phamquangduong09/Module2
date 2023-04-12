@@ -1,4 +1,6 @@
-package BTTL;
+package BTTL.Day6;
+
+import BTTL.Day6.Employee;
 
 public class TestEmployee {
     public static void maxExp(Employee[] employees) {

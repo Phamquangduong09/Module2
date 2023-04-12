@@ -1,4 +1,4 @@
-package BTTL;
+package BTTL.Day5;
 
 public class Day5Baitap1 {
     String ten;

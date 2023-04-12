@@ -1,6 +1,6 @@
 package Day10_4;
 
-public class Circle implements Resizeable{
+public class Circle extends HinhHoc implements Resizeable{
     private String color ;
     private double radius;
 
@@ -27,12 +27,14 @@ public class Circle implements Resizeable{
     public void setRadius(double radius) {
         this.radius = radius;
     }
+    public double getArea (){
+        return (radius*radius ) * 3.14;
+    }
 
 
     @Override
     public void resize(double percent) {
-        this.color = "red";
-        this.radius = percent;
+        System.out.println(getArea()*percent);
     }
 
     @Override

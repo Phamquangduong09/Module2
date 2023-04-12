@@ -1,4 +1,4 @@
-package BTTL;
+package BTTL.Day1;
 import java.util.Scanner;
 public class Baitap1Day1 {
     public static void main(String[] args) {

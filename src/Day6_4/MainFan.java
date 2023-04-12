@@ -1,6 +1,7 @@
 package Day6_4;
 
-public class MainFan {
+public class
+MainFan {
     public static void main(String[] args) {
        Fan fan1 = new Fan();
        Fan fan2 = new Fan();

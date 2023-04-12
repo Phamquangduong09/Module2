@@ -1,29 +1,28 @@
-package BTTL;
+package BTTL.Day6;
 
 public class NhanVien {
-    private int id;
+
+    private  int id ;
+    private static int idTemp = 1;
     private String name;
     private int age;
 
     public NhanVien() {
+        idTemp++;
     }
 
-    public NhanVien(int id, String name, int age) {
-        this.id = id;
+    public NhanVien( String name, int age) {
+        this.id = idTemp++ ;
         this.name = name;
         this.age = age;
     }
 
-    public NhanVien(int i) {
-    }
 
     @Override
     public String toString() {
-        return "Employee{" +
-                "id=" + id +
+        return "id=" + id +
                 ", name='" + name + '\'' +
-                ", age=" + age +
-                '}';
+                ", age=" + age;
     }
 
     public String getName() {

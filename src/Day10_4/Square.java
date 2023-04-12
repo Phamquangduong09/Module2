@@ -1,6 +1,6 @@
 package Day10_4;
 
-public class Square implements Resizeable {
+public class Square extends HinhHoc implements Resizeable {
     private double height;
     private String color;
 
@@ -27,11 +27,13 @@ public class Square implements Resizeable {
     public void setColor(String color) {
         this.color = color;
     }
+    public double getArea(){
+        return height*height;
+    }
 
     @Override
     public void resize(double percent) {
-        this.height= percent;
-        this.color = "pink";
+        System.out.println(getArea()*percent);
     }
 
     @Override

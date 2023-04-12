@@ -1,4 +1,4 @@
-package BTTL;
+package BTTL.Day5;
 
 import java.util.Scanner;
 
@@ -60,7 +60,7 @@ public class Product {
                 ", type='" + type ;
     }
 
-    static Scanner scanner= new Scanner(System.in);
+    public static Scanner scanner= new Scanner(System.in);
     public static Product getProduct() {
         System.out.println("Nhập mã: ");
         int id = scanner.nextInt();

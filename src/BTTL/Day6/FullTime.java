@@ -1,6 +1,7 @@
-package BTTL;
+package BTTL.Day6;
 
-public class FullTime extends NhanVien{
+public class FullTime extends NhanVien {
+
     private int yearsOfExp;
 
     public FullTime() {
@@ -10,16 +11,14 @@ public class FullTime extends NhanVien{
         this.yearsOfExp = yearsOfExp;
     }
 
-    public FullTime(int id, String name, int age, int yearsOfExp) {
-        super(id , name , age);
+    public FullTime( String name, int age, int yearsOfExp) {
+        super( name , age);
         this.yearsOfExp = yearsOfExp;
     }
 
     @Override
     public String toString() {
-        return "FullTime{" + super.toString()+
-                "yearsOfExp=" + yearsOfExp +
-                '}';
+        return super.toString() + ", yearOfExp=" + yearsOfExp;
     }
 
     public int getYearsOfExp() {

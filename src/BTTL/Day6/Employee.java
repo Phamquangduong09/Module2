@@ -1,4 +1,4 @@
-package BTTL;
+package BTTL.Day6;
 
 public class Employee {
     int id;

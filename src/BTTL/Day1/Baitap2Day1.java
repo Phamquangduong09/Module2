@@ -1,4 +1,4 @@
-package BTTL;
+package BTTL.Day1;
 
 import java.util.Scanner;
 

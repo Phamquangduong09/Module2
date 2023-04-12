@@ -1,4 +1,4 @@
-package BTTL;
+package BTTL.Day4;
 
 public class Day4Baitap2 {
     public static void main(String[] args) {

@@ -1,4 +1,6 @@
-package BTTL;
+package BTTL.Day5;
+
+import BTTL.Day5.Day5Baitap1;
 
 import java.util.Scanner;
 

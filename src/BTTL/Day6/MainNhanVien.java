@@ -1,15 +1,15 @@
-package BTTL;
+package BTTL.Day6;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
-import static BTTL.Product.scanner;
+import static BTTL.Day5.Product.scanner;
 
 public class MainNhanVien {
     public static void main(String[] args) {
-        PartTime partTime1 = new PartTime(1, "a", 23, 74);
-        PartTime partTime2 = new PartTime(2, "b", 23, 46);
-        FullTime fullTime1 = new FullTime(3, "c", 27, 2);
+        PartTime partTime1 = new PartTime("a", 23, 74);
+        PartTime partTime2 = new PartTime("b", 23, 46);
+        FullTime fullTime1 = new FullTime("c", 27, 2);
         NhanVien[] nhanViens = new NhanVien[3];
         nhanViens[0] = partTime1;
         nhanViens[1] = partTime2;
@@ -90,11 +90,11 @@ public class MainNhanVien {
         int choice1 = Integer.parseInt(scanner.nextLine());
         switch (choice1) {
             case 1:
-                FullTime fullTime = new FullTime(4, "f", 45, 7);
+                FullTime fullTime = new FullTime( "f", 45, 7);
                 nhanViens2[nhanViens2.length - 1] = fullTime;
                 break;
             case 2:
-                PartTime partTime = new PartTime(4, "h", 43, 800);
+                PartTime partTime = new PartTime( "h", 43, 800);
                 nhanViens2[nhanViens2.length - 1] = partTime;
                 break;
         }
