@@ -1,9 +1,7 @@
-package BTTL.Day8;
+package BTTL.Day8.BaiTap1;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
-import static BTTL.Day5.Product.scanner;
 
 public class MainProduct {
     public static Scanner scanner = new Scanner(System.in);
@@ -19,8 +17,8 @@ public class MainProduct {
         for (int i = 0; i < products.length; i++) {
             products[i] = getProduct(brands);
         }
-        for (int i = 0; i < products.length; i++) {
-            System.out.println(products[i]);
+        for (Product product : products) {
+            System.out.println(product);
         }
     }
 
@@ -38,19 +36,12 @@ public class MainProduct {
         System.out.println("Nhập hãng bạn muốn chọn :");
         int choice = Integer.parseInt(scanner.nextLine());
         Brand newBrand = new Brand();
-        switch (choice) {
-            case 1:
-                newBrand = brands[0];
-                break;
-            case 2:
-                newBrand = brands[1];
-                break;
-            case 3:
-                newBrand = brands[2];
-                break;
-            default:
-                System.out.println("Không có  thông tin bạn cần !!");
+        for (int i = 0; i < brands.length; i++) {
+            if (choice == brands[i].getId()) {
+                newBrand = brands[i];
+            }
         }
+
         return new Product(name, price, description, newBrand);
     }
 }

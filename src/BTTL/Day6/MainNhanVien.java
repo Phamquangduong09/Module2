@@ -68,7 +68,7 @@ public class MainNhanVien {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Nhập nhân viên bạn mmuốn xóa");
         int n = scanner.nextInt();
-        for (int i = 0; i < nhanViens.length; i++) {
+        for (int i = 0; i < nhanViens.length; i++){
             if (n != nhanViens[i].getId()) {
                 nhanViens1[j] = nhanViens[i];
                 j++;

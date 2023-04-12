@@ -1,6 +1,6 @@
-package BTTL.Day8;
+package BTTL.Day8.BaiTap1;
 
-import java.util.Scanner;
+import BTTL.Day8.BaiTap1.Brand;
 
 public class Product {
     private double id;
@@ -23,8 +23,8 @@ public class Product {
         this.brand = brand;
     }
 
-    public Product(String name, double price, String description) {
-    }
+//    public Product(String name, double price, String description) {
+//    }
 
     public double getId() {
         return id;

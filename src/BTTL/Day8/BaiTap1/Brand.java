@@ -1,4 +1,4 @@
-package BTTL.Day8;
+package BTTL.Day8.BaiTap1;
 
 public class Brand {
     private int id;
