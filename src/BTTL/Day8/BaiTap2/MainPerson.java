@@ -24,6 +24,7 @@ public class MainPerson {
             System.out.println("2.Xóa");
             System.out.println("3.Thêm");
             System.out.println("4.Sửa");
+            System.out.println("5.Sắp xếp");
             System.out.println("0.Thoát");
             System.out.println("Nhập lựa chọn của bạn");
             int choice = Integer.parseInt(scanner.nextLine());
@@ -37,11 +38,13 @@ public class MainPerson {
                     deletePerson(person);
                     break;
                 case 3:
-                    person=addPerson(person,addresses);
+                    person = addPerson(person, addresses);
                     break;
                 case 4:
-                    editPerson(person,addresses);
+                    editPerson(person, addresses);
                     break;
+                case 5:
+                    dockingPerson(person);
             }
 
         } while (true);
@@ -89,15 +92,15 @@ public class MainPerson {
 
     public static Person[] addPerson(Person[] person, Address[] addresses) {
         Person[] people1 = new Person[person.length + 1];
-        for (int i = 0; i < person.length; i++) {
-            people1[i] = person[i];
-        }
+        System.arraycopy(person, 0, people1, 0, person.length);
         people1[people1.length - 1] = getPerson(addresses);
         return people1;
     }
-    public static Person[] editPerson(Person [] person,Address[] addresses){
+
+    public static Person[] editPerson(Person[] person, Address[] addresses) {
+        Address idAddress = new Address();
         System.out.println("Nhập nhân id bạn muốn sửa");
-        int editId= Integer.parseInt(scanner.nextLine());
+        int editId = Integer.parseInt(scanner.nextLine());
         for (Person value : person) {
             if (editId == value.getId()) {
                 System.out.println("Tên bạn muốn sửa:");
@@ -109,11 +112,29 @@ public class MainPerson {
                 displayAddress(addresses);
                 System.out.println("Nhập địa chỉ bạn muốn sửa :");
                 int number = Integer.parseInt(scanner.nextLine());
-                if (number==1){
-                    String live = scanner.nextLine();
+                for (int i = 0; i < addresses.length; i++) {
+                    if (number == addresses[i].getId()) {
+                        idAddress = addresses[i];
+                    }
+                }
+                value.setAddress(idAddress);
+            }
+        }
+        return person;
+    }
+
+    public static Person[] dockingPerson(Person[] person) {
+        Person temp = new Person();
+        for (int i = 0; i < person.length; i++) {
+            for (int j = i + 1; j < person.length; j++) {
+                if (person[i].getName().compareTo(person[j].getName()) > 0) {
+                    temp = person[i];
+                    person[i] = person[j];
+                    person[j] = temp;
                 }
             }
         }
         return person;
     }
+
 }
