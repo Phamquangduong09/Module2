@@ -15,7 +15,7 @@ public class MainPerson {
         int n = Integer.parseInt(scanner.nextLine());
         Person[] person = new Person[n];
         for (int i = 0; i < person.length; i++) {
-            person[i]=addPerson(addresses);
+            person[i] = getPerson(addresses);
         }
 
         do {
@@ -27,19 +27,27 @@ public class MainPerson {
             System.out.println("0.Thoát");
             System.out.println("Nhập lựa chọn của bạn");
             int choice = Integer.parseInt(scanner.nextLine());
-            switch (choice){
+            switch (choice) {
                 case 1:
-                    for (int i = 0; i < person.length; i++) {
-                        System.out.println(person[i]);
+                    for (Person value : person) {
+                        System.out.println(value);
                     }
                     break;
                 case 2:
+                    deletePerson(person);
+                    break;
+                case 3:
+                    person=addPerson(person,addresses);
+                    break;
+                case 4:
+                    editPerson(person,addresses);
+                    break;
             }
 
-        }while (true);
+        } while (true);
     }
 
-    public static Person addPerson(Address[] addresses) {
+    public static Person getPerson(Address[] addresses) {
         System.out.println("Nhập tên :");
         String name = scanner.nextLine();
         System.out.println("Nhập tuổi :");
@@ -48,29 +56,64 @@ public class MainPerson {
         System.out.println("Nhập địa chỉ bạn muốn chọn :");
         int number = Integer.parseInt(scanner.nextLine());
         Address idAdress = new Address();
-        for (int i = 0; i < addresses.length; i++) {
-            if (number == addresses[i].getId()) {
-                idAdress = addresses[i];
+        for (Address address : addresses) {
+            if (number == address.getId()) {
+                idAdress = address;
             }
         }
-        return new Person( name, age, idAdress);
+        return new Person(name, age, idAdress);
     }
 
     public static Address[] displayAddress(Address[] addresses) {
-        for (int i = 0; i < addresses.length; i++) {
-            System.out.println(addresses[i]);
+        for (Address address : addresses) {
+            System.out.println(address);
         }
         return addresses;
     }
-    public static void deletePerson(Person[]person){
+
+    public static void deletePerson(Person[] person) {
         int j = 0;
-        Person [] people = new Person[person.length-1];
-        System.out.println("Nhập nhân viên bạn mmuốn xóa");
-        int n = scanner.nextInt();
-        for (int i = 0; i < person.length; i++) {
-            if ( n != person[i].getId()){
-                people[j]= person[i];
+        Person[] people = new Person[person.length - 1];
+        System.out.println("Nhập nhân viên bạn muốn xóa");
+        int n = Integer.parseInt(scanner.nextLine());
+        for (Person value : person) {
+            if (n != value.getId()) {
+                people[j] = value;
+                j++;
             }
         }
+        for (int i = 0; i < j; i++) {
+            System.out.println(people[i]);
+        }
+    }
+
+    public static Person[] addPerson(Person[] person, Address[] addresses) {
+        Person[] people1 = new Person[person.length + 1];
+        for (int i = 0; i < person.length; i++) {
+            people1[i] = person[i];
+        }
+        people1[people1.length - 1] = getPerson(addresses);
+        return people1;
+    }
+    public static Person[] editPerson(Person [] person,Address[] addresses){
+        System.out.println("Nhập nhân id bạn muốn sửa");
+        int editId= Integer.parseInt(scanner.nextLine());
+        for (Person value : person) {
+            if (editId == value.getId()) {
+                System.out.println("Tên bạn muốn sửa:");
+                String name = scanner.nextLine();
+                value.setName(name);
+                System.out.println("Tuổi bạn muốn sửa:");
+                int age = Integer.parseInt(scanner.nextLine());
+                value.setAge(age);
+                displayAddress(addresses);
+                System.out.println("Nhập địa chỉ bạn muốn sửa :");
+                int number = Integer.parseInt(scanner.nextLine());
+                if (number==1){
+                    String live = scanner.nextLine();
+                }
+            }
+        }
+        return person;
     }
 }
