@@ -62,4 +62,15 @@ public class MainPerson {
         }
         return addresses;
     }
+    public static void deletePerson(Person[]person){
+        int j = 0;
+        Person [] people = new Person[person.length-1];
+        System.out.println("Nhập nhân viên bạn mmuốn xóa");
+        int n = scanner.nextInt();
+        for (int i = 0; i < person.length; i++) {
+            if ( n != person[i].getId()){
+                people[j]= person[i];
+            }
+        }
+    }
 }
