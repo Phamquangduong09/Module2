@@ -2,11 +2,11 @@ package BTTL.Day9;
 
 import java.util.Scanner;
 
-public class PhoneBookManager extends Phone {
+public class PhoneBookManager extends Phone implements interfaceIPhone {
     Contact[] contacts;
 
     public PhoneBookManager() {
-        Contact[] arrContact ;
+        Contact[] arrContact;
         Contact contact1 = new Contact("Duong", "01234567");
         Contact contact2 = new Contact("Thai", "78451359");
         arrContact = new Contact[]{contact1, contact2};
@@ -23,42 +23,33 @@ public class PhoneBookManager extends Phone {
     @Override
     void insertPhone() {
         Contact[] contacts1 = new Contact[contacts.length + 1];
-        System.arraycopy(contacts, 0, contacts1, 0, contacts1.length);
-        getContact();
+        System.arraycopy(contacts, 0, contacts1, 0, contacts.length);
+        contacts1[contacts1.length - 1] = getContact();
+        contacts = contacts1;
     }
 
     @Override
     void removePhone(String name) {
         int j = 0;
         Contact[] contacts2 = new Contact[contacts.length - 1];
-        boolean check = false;
         if (!name.equals("")) {
             for (Contact contact : contacts) {
-                if (name.equals(contact.getName())) {
-                    check = true;
-
-                    if (!name.equals(contact.getName())) {
-                        contacts2[j] = contact;
-                        j++;
-                    }
+                if (!name.equals(contact.getName())) {
+                    contacts2[j] = contact;
+                    j++;
                 }
             }
-            if (!check) {
-                System.out.println("Không có tên bạn cần tìm");
-            }
-            for (int i = 0; i < j; i++) {
-                System.out.println(contacts2[i]);
-            }
-        } else {
-            System.out.println("hãy nhập tên");
+            contacts = contacts2;
+            System.out.println("Xoas thanh coong");
         }
     }
+
 
     @Override
     void updatePhone(String name) {
         for (int i = 0; i < contacts.length; i++) {
-            if(name.equals(contacts[i].getName())){
-                contacts[i]=getContact();
+            if (name.equals(contacts[i].getName())) {
+                contacts[i] = getContact();
             }
         }
         displayContact();
