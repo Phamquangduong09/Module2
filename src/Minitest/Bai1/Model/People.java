@@ -41,9 +41,9 @@ public class People {
 
     @Override
     public String toString() {
-        return id + ", name :" + name +
-                ", age :" + age
-                ;
+        return "id :" + id +
+                ", name :" + name +
+                ", age :" + age;
     }
 
     public void add(People student) {

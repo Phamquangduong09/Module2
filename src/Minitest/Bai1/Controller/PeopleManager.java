@@ -34,6 +34,16 @@ public class PeopleManager implements Manager {
 
     @Override
     public void addPeople() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Mời nhập tên");
+        String name = scanner.nextLine();
+        System.out.println("Mời nhập tuổi");
+        int age = Integer.parseInt(scanner.nextLine());
+        People people = new People(name ,age);
+        person.add(people);
+    }
+    @Override
+    public void addStudent() {
         getPeople();
     }
 
@@ -60,10 +70,18 @@ public class PeopleManager implements Manager {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Nhập tên  id bạn muốn xóa :");
         int idDelete = Integer.parseInt(scanner.nextLine());
-        for (int i = 0; i < person.size(); i++) {
-            if (idDelete == person.get(i).getId()) {
-                person.remove(i);
+        boolean flag = false;
+        if (idDelete != -1) {
+            for (int i = 0; i < person.size(); i++) {
+                if (idDelete == person.get(i).getId()) {
+                    person.remove(i);
+                    flag=true;
+                }
+            }if(!flag){
+                System.out.println("không tìm thấy");
             }
+        }else {
+            System.out.println("Không có id trong danh sách");
         }
     }
 
@@ -72,15 +90,27 @@ public class PeopleManager implements Manager {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Nhập tên id bạn muốn sửa :");
         int idEdit = Integer.parseInt(scanner.nextLine());
-        for (int i = 0; i < person.size(); i++) {
-            if (idEdit == person.get(i).getId()) {
-                System.out.println("Nhập  tên bạn muốn sửa");
-                String name = scanner.nextLine();
-                person.get(i).setName(name);
-                System.out.println("Nhập tuổi bạn muốn sửa");
-                int age = Integer.parseInt(scanner.nextLine());
-                person.get(i).setAge(age);
+        boolean flag = false;
+        if (idEdit != -1) {
+            for (int i = 0; i < person.size(); i++){
+                if (idEdit == person.get(i).getId()) {
+                    System.out.println("Nhập  tên bạn muốn sửa");
+                    String name = scanner.nextLine();
+                    person.get(i).setName(name);
+                    System.out.println("Nhập tuổi bạn muốn sửa");
+                    int age = Integer.parseInt(scanner.nextLine());
+                    person.get(i).setAge(age);
+                    flag=true;
+                    if (person.get(i)instanceof Student){
+                        System.out.println("Mời nhập vào điểm TB mới");
+                        ((Student) person.get(i)).setAvg(Double.parseDouble(scanner.nextLine()));
+                    }
+                }
+            }if(!flag){
+                System.out.println("không tìm thấy");
             }
+        }else {
+            System.out.println("không có id trong danh sách");
         }
     }
 
@@ -92,6 +122,7 @@ public class PeopleManager implements Manager {
                 if (o1 instanceof Student && o2 instanceof Student) {
                     return (int) ((Student) o1).getAvg() - (int) ((Student) o2).getAvg();
                 }
+
                 return 0;
             }
         });

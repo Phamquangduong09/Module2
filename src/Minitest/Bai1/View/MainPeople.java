@@ -9,7 +9,6 @@ public class MainPeople {
 
     public static void main(String[] args) {
         PeopleManager peopleManager = new PeopleManager();
-        peopleManager.getPeople();
         do {
             System.out.println("----Menu----");
             System.out.println("1.Hiển thị ");
@@ -26,13 +25,27 @@ public class MainPeople {
                     peopleManager.displayPeople();
                     break;
                 case 2:
-                    peopleManager.addPeople();
+                    System.out.println("1.Thêm People ");
+                    System.out.println("2.Thêm Student ");
+                    System.out.println("Nhập lựa chọn của bạn");
+                    int option= Integer.parseInt(scanner.nextLine());
+                    switch (option){
+                        case 1:
+                            peopleManager.addPeople();
+                            peopleManager.displayPeople();
+                            break;
+                        case 2:
+                            peopleManager.addStudent();
+                            peopleManager.displayPeople();
+                            break;
+                    }
                     break;
                 case 3:
                     peopleManager.search();
                     break;
                 case 4:
                     peopleManager.deletePeople();
+                    break;
                 case 5:
                     peopleManager.editPeople();
                     break;
@@ -41,8 +54,10 @@ public class MainPeople {
                     break;
                 case 7:
                     peopleManager.sumAvg();
+                    break;
                 case 0:
                     System.exit(0);
+                    break;
 
             }
 
