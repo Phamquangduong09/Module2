@@ -45,9 +45,11 @@ public class MainPeople {
                     break;
                 case 4:
                     peopleManager.deletePeople();
+                    peopleManager.displayPeople();
                     break;
                 case 5:
                     peopleManager.editPeople();
+                    peopleManager.displayPeople();
                     break;
                 case 6:
                     peopleManager.arrangeAvg();

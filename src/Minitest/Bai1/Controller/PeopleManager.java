@@ -122,11 +122,11 @@ public class PeopleManager implements Manager {
                 if (o1 instanceof Student && o2 instanceof Student) {
                     return (int) ((Student) o1).getAvg() - (int) ((Student) o2).getAvg();
                 }
-
                 return 0;
             }
         });
     }
+
 
     @Override
     public void sumAvg() {
