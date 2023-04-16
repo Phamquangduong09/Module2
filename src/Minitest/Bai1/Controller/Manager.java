@@ -1,4 +1,4 @@
-package Minitest.Bai1;
+package Minitest.Bai1.Controller;
 
 public interface Manager {
     void displayPeople();

@@ -1,4 +1,6 @@
-package Minitest.Bai1;
+package Minitest.Bai1.View;
+
+import Minitest.Bai1.Controller.PeopleManager;
 
 import java.util.Scanner;
 

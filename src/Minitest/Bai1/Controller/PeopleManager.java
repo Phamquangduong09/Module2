@@ -1,4 +1,8 @@
-package Minitest.Bai1;
+package Minitest.Bai1.Controller;
+
+import Minitest.Bai1.Controller.Manager;
+import Minitest.Bai1.Model.People;
+import Minitest.Bai1.Model.Student;
 
 import java.util.*;
 

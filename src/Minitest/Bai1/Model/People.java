@@ -1,4 +1,4 @@
-package Minitest.Bai1;
+package Minitest.Bai1.Model;
 
 public class People {
     private int id;
