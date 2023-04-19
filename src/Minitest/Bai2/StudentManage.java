@@ -57,8 +57,10 @@ public class StudentManage implements Manager<Student> {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter id delete");
         int idDelete = Integer.parseInt(scanner.nextLine());
-        if (getIdStudent(idDelete) >= 0) {
-            return arrayList.remove(idDelete);
+        Student student = getIdStudent(idDelete);
+        if (student != null) {
+            arrayList.remove(student);
+            return student;
         } else {
             return null;
         }
@@ -67,11 +69,16 @@ public class StudentManage implements Manager<Student> {
     @Override
     public void search() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter id search");
-        int idSearch = Integer.parseInt(scanner.nextLine());
-        if (getIdStudent(idSearch) >= 0) {
-            System.out.println(arrayList.get(idSearch));
-        } else {
+        System.out.println("Enter name search");
+        String nameSearch = scanner.nextLine();
+        boolean flag = false;
+        for (Student student : arrayList) {
+            if (student.getName().equalsIgnoreCase(nameSearch)) {
+                System.out.println(student);
+                flag = true;
+            }
+        }
+        if (!flag) {
             System.out.println("No information");
         }
     }
@@ -105,13 +112,63 @@ public class StudentManage implements Manager<Student> {
         return gender;
     }
 
-    public int getIdStudent(int id) {
-        for (int i = 0; i < arrayList.size(); i++) {
-            if (id == arrayList.get(i).getId()) {
-                return i;
+    public void displayStudentById() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the id you want to find");
+        int idToFind = Integer.parseInt(sc.nextLine());
+        if (getIdStudent(idToFind) != null) {
+            System.out.println(getIdStudent(idToFind));
+        } else {
+            System.out.println("No information");
+        }
+
+    }
+
+    public void displayStudentByClass() {
+        System.out.println("1.");
+    }
+
+    public void displayHighestPoint() {
+        double max = arrayList.get(0).getAvgPoint();
+        for (Student student : arrayList) {
+            if (max < student.getAvgPoint()) {
+                max = student.getAvgPoint();
             }
         }
-        return -1;
+        System.out.println("Highest point :" + max);
+    }
+
+    public void displayLowestScore() {
+        double min = arrayList.get(0).getAvgPoint();
+        for (Student student : arrayList) {
+            if (min > student.getAvgPoint()) {
+                min = student.getAvgPoint();
+            }
+        }
+        System.out.println("Lowest score" + min);
+    }
+
+    public void displayRank() {
+        for (Student student : arrayList) {
+            if (student.getAvgPoint() > 8.0) {
+                System.out.println(student + " Rank :  Good standing");
+            } else if (student.getAvgPoint() > 6.0 && student.getAvgPoint() < 8.0) {
+                System.out.println(student + " Rank : Academic pretty");
+            }else if (student.getAvgPoint()< 6.0 && student.getAvgPoint() > 4.5){
+                System.out.println(student + " Rank :Academic performance");
+            }else {
+                System.out.println(student + " Rank : Poor academic performance");
+            }
+        }
+    }
+
+    public Student getIdStudent(int id) {
+        for (Student student : arrayList) {
+            if (id == student.getId()) {
+                return student;
+            }
+        }
+        return null;
     }
 }
 

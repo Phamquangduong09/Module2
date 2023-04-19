@@ -72,10 +72,10 @@ public class Student {
     @Override
     public String toString() {
         return "id :" + id +
-                " name=  " + name +
-                " age=" + age +
-                " gender='" + gender +
-                " avgPoint=" + avgPoint +
-                " classRoom=" + classRoom;
+                " name: " + name +
+                " age: " + age +
+                " gender: " + gender +
+                " avgPoint: " + avgPoint +
+                " classRoom : " + classRoom;
     }
 }
