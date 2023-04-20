@@ -1,4 +1,4 @@
-package Minitest.Bai2;
+package Minitest.Bai2.model;
 
 public class ClassRoom {
     private int id ;

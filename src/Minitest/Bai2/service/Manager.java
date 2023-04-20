@@ -1,4 +1,4 @@
-package Minitest.Bai2;
+package Minitest.Bai2.service;
 
 import java.util.List;
 

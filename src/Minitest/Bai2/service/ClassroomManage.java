@@ -1,4 +1,6 @@
-package Minitest.Bai2;
+package Minitest.Bai2.service;
+
+import Minitest.Bai2.model.ClassRoom;
 
 import java.util.ArrayList;
 import java.util.Scanner;

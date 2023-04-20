@@ -1,4 +1,6 @@
-package Minitest.Bai2;
+package Minitest.Bai2.controller;
+
+import Minitest.Bai2.service.StudentManage;
 
 import java.util.Scanner;
 

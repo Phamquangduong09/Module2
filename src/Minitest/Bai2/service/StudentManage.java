@@ -1,4 +1,9 @@
-package Minitest.Bai2;
+package Minitest.Bai2.service;
+
+import Minitest.Bai2.model.ClassRoom;
+import Minitest.Bai2.service.ClassroomManage;
+import Minitest.Bai2.service.Manager;
+import Minitest.Bai2.model.Student;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -239,15 +244,6 @@ public class StudentManage implements Manager<Student> {
             }
         }
     }
-
-//    public void getStudentByClass(String classroom) {
-//        for (Student list : arrayList) {
-//            if (list.getClassRoom().getName().equalsIgnoreCase(classroom)) {
-//                System.out.println(list);
-//            }
-//        }
-//    }
-
 }
 
 

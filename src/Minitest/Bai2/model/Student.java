@@ -1,4 +1,6 @@
-package Minitest.Bai2;
+package Minitest.Bai2.model;
+
+import Minitest.Bai2.model.ClassRoom;
 
 public class Student {
     private int id ;
