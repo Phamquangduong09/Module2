@@ -18,6 +18,7 @@ public class MySystem {
             System.out.println("8. Display Student highest point ");
             System.out.println("9. Display Student lowest score");
             System.out.println("10. Display Student rank");
+            System.out.println("10. Display Student by gender");
             System.out.println(" Enter choose");
             int choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
@@ -50,6 +51,9 @@ public class MySystem {
                     break;
                 case 10:
                     studentManage.displayRank();
+                    break;
+                case 11:
+                    studentManage.displayStudentByGender();
                     break;
             }
         } while (true);

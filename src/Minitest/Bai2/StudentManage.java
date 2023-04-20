@@ -14,9 +14,17 @@ public class StudentManage implements Manager<Student> {
         String name = scanner.nextLine();
         System.out.println("Enter Age ");
         int age = Integer.parseInt(scanner.nextLine());
+        if (age < 6 || age > 60) {
+            System.out.println("Invalid input");
+            return null;
+        }
         String gender = chooseGender();
         System.out.println("Enter point");
         double point = Double.parseDouble(scanner.nextLine());
+        if (point < 0 || point > 10) {
+            System.out.println("Invalid input");
+            return null;
+        }
         classroomManage.displayClassroom();
         System.out.println("Enter Class");
         ClassRoom classes = classroomManage.chooseClassroom();
@@ -26,7 +34,7 @@ public class StudentManage implements Manager<Student> {
     }
 
     @Override
-    public void updateStudent() {
+    public ArrayList<Student> updateStudent() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter id update");
         int idUpdate = Integer.parseInt(scanner.nextLine());
@@ -37,19 +45,31 @@ public class StudentManage implements Manager<Student> {
                 list.setName(name);
                 System.out.println("Enter Age ");
                 int age = Integer.parseInt(scanner.nextLine());
-                list.getAge(age);
+                if (age < 6 || age > 60) {
+                    System.out.println("Invalid input");
+                    return null;
+                }else {
+                    list.getAge(age);
+                }
+
                 String gender = chooseGender();
                 list.setGender(gender);
                 System.out.println("Enter point");
                 double point = Double.parseDouble(scanner.nextLine());
-                list.setAvgPoint(point);
+                if (point < 0 || point > 10) {
+                    System.out.println("Invalid input");
+                    return null;
+                }else {
+                    list.setAvgPoint(point);
+                }
+
                 classroomManage.displayClassroom();
                 System.out.println("Enter Class");
                 ClassRoom classes = classroomManage.chooseClassroom();
                 list.setClassRoom(classes);
             }
         }
-        displayStudent();
+      return arrayList;
     }
 
     @Override
@@ -57,7 +77,7 @@ public class StudentManage implements Manager<Student> {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter id delete");
         int idDelete = Integer.parseInt(scanner.nextLine());
-        Student student = getIdStudent(idDelete);
+        Student student = getStudent(idDelete);
         if (student != null) {
             arrayList.remove(student);
             return student;
@@ -73,7 +93,7 @@ public class StudentManage implements Manager<Student> {
         String nameSearch = scanner.nextLine();
         boolean flag = false;
         for (Student student : arrayList) {
-            if (student.getName().equalsIgnoreCase(nameSearch)) {
+            if (student.getName().toLowerCase().contains(nameSearch.toLowerCase())) {
                 System.out.println(student);
                 flag = true;
             }
@@ -116,8 +136,9 @@ public class StudentManage implements Manager<Student> {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the id you want to find");
         int idToFind = Integer.parseInt(sc.nextLine());
-        if (getIdStudent(idToFind) != null) {
-            System.out.println(getIdStudent(idToFind));
+        int id = getIdStudent1(idToFind);
+        if (id != -1) {
+            System.out.println(arrayList.get(id));
         } else {
             System.out.println("No information");
         }
@@ -125,27 +146,41 @@ public class StudentManage implements Manager<Student> {
     }
 
     public void displayStudentByClass() {
-        System.out.println("1.");
+        Scanner scanner = new Scanner(System.in);
+        classroomManage.displayClassroom();
+        System.out.println("Enter the classroom you want to display");
+        String classRoom = scanner.nextLine();
+        for (Student st : arrayList) {
+            if (classRoom.contains(st.getClassRoom().getName())) {
+                System.out.println(st);
+            }
+        }
+
+
     }
 
     public void displayHighestPoint() {
         double max = arrayList.get(0).getAvgPoint();
+        Student maxPoint = arrayList.get(0);
         for (Student student : arrayList) {
             if (max < student.getAvgPoint()) {
                 max = student.getAvgPoint();
+                maxPoint = student;
             }
         }
-        System.out.println("Highest point :" + max);
+        System.out.println("Highest point :" + maxPoint +" " + max);
     }
 
     public void displayLowestScore() {
         double min = arrayList.get(0).getAvgPoint();
+        Student minPoint = arrayList.get(0);
         for (Student student : arrayList) {
             if (min > student.getAvgPoint()) {
                 min = student.getAvgPoint();
+                minPoint = student;
             }
         }
-        System.out.println("Lowest score" + min);
+        System.out.println("Lowest score" + minPoint + " " + min);
     }
 
     public void displayRank() {
@@ -154,15 +189,32 @@ public class StudentManage implements Manager<Student> {
                 System.out.println(student + " Rank :  Good standing");
             } else if (student.getAvgPoint() > 6.0 && student.getAvgPoint() < 8.0) {
                 System.out.println(student + " Rank : Academic pretty");
-            }else if (student.getAvgPoint()< 6.0 && student.getAvgPoint() > 4.5){
+            } else if (student.getAvgPoint() < 6.0 && student.getAvgPoint() > 4.5) {
                 System.out.println(student + " Rank :Academic performance");
-            }else {
+            } else {
                 System.out.println(student + " Rank : Poor academic performance");
             }
         }
     }
 
-    public Student getIdStudent(int id) {
+    public void displayStudentByGender() {
+        System.out.println("Select the gender you want to display");
+        System.out.println("1. Male");
+        System.out.println("2. Female");
+        System.out.println("3. other");
+        Scanner scanner = new Scanner(System.in);
+        int gender = Integer.parseInt(scanner.nextLine());
+        if (gender == 1) {
+            getStudentByGender("Male");
+        } else if (gender == 2) {
+            getStudentByGender("Female");
+        } else {
+            getStudentByGender("Other");
+        }
+
+    }
+
+    public Student getStudent(int id) {
         for (Student student : arrayList) {
             if (id == student.getId()) {
                 return student;
@@ -170,5 +222,33 @@ public class StudentManage implements Manager<Student> {
         }
         return null;
     }
+
+    public int getIdStudent1(int id) {
+        for (int i = 0; i < arrayList.size(); i++) {
+            if (id == arrayList.get(i).getId()) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void getStudentByGender(String gender) {
+        for (Student list : arrayList) {
+            if (list.getGender().equalsIgnoreCase(gender)) {
+                System.out.println(list);
+            }
+        }
+    }
+
+//    public void getStudentByClass(String classroom) {
+//        for (Student list : arrayList) {
+//            if (list.getClassRoom().getName().equalsIgnoreCase(classroom)) {
+//                System.out.println(list);
+//            }
+//        }
+//    }
+
 }
+
+
 
