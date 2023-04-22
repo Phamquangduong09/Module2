@@ -19,17 +19,15 @@ public class StudentManage implements Manager<Student> {
         String name = scanner.nextLine();
         System.out.println("Enter Age ");
         int age = Integer.parseInt(scanner.nextLine());
-        if (age < 6 || age > 60) {
-            System.out.println("Invalid input");
-            return null;
-        }
+        do  {
+            age= Integer.parseInt(scanner.nextLine());
+        }while (age < 6 || age > 60);
         String gender = chooseGender();
         System.out.println("Enter point");
-        double point = Double.parseDouble(scanner.nextLine());
-        if (point < 0 || point > 10) {
-            System.out.println("Invalid input");
-            return null;
-        }
+        double point;
+        do  {
+            point= Integer.parseInt(scanner.nextLine());
+        }while (point < 0 || point > 10);
         classroomManage.displayClassroom();
         System.out.println("Enter Class");
         ClassRoom classes = classroomManage.chooseClassroom();
@@ -49,25 +47,19 @@ public class StudentManage implements Manager<Student> {
                 String name = scanner.nextLine();
                 list.setName(name);
                 System.out.println("Enter Age ");
-                int age = Integer.parseInt(scanner.nextLine());
-                if (age < 6 || age > 60) {
-                    System.out.println("Invalid input");
-                    return null;
-                }else {
-                    list.getAge(age);
-                }
-
+                int age ;
+                do  {
+                    age= Integer.parseInt(scanner.nextLine());
+                }while (age < 6 || age > 60);
+                list.getAge(age);
                 String gender = chooseGender();
                 list.setGender(gender);
                 System.out.println("Enter point");
-                double point = Double.parseDouble(scanner.nextLine());
-                if (point < 0 || point > 10) {
-                    System.out.println("Invalid input");
-                    return null;
-                }else {
-                    list.setAvgPoint(point);
-                }
-
+                double point ;
+                do  {
+                    point= Integer.parseInt(scanner.nextLine());
+                }while (point < 0 || point > 10);
+                list.setAvgPoint(point);
                 classroomManage.displayClassroom();
                 System.out.println("Enter Class");
                 ClassRoom classes = classroomManage.chooseClassroom();
@@ -243,6 +235,12 @@ public class StudentManage implements Manager<Student> {
                 System.out.println(list);
             }
         }
+    }
+    public void addClass(){
+        classroomManage.addClassroom();
+    }
+    public void updateClass(){
+        classroomManage.updateClass();
     }
 }
 

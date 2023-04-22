@@ -5,7 +5,7 @@ import java.util.List;
 public interface Manager<E> {
     List<E> addStudent();
 
-   List<E> updateStudent();
+    List<E> updateStudent();
 
     E deleteStudent();
 

@@ -43,6 +43,7 @@ public class ClassroomManage {
         String name = scanner.nextLine();
         ClassRoom classRoom = new ClassRoom(name);
         classRooms.add(classRoom);
+
     }
     public void updateClass(){
         Scanner scanner = new Scanner(System.in);
