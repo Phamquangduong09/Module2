@@ -27,7 +27,7 @@ public class SolveTheEquation {
             double delta = Math.pow(b, 2) -( 4 * a * c);
 
             if (delta < 0) {
-                throw new Exception("The equation has no solution!");
+                throw new Exception(" The equation has no solution! ");
             } else if (delta == 0) {
                 double x = -b / (2 * a);
                 System.out.println("Equation has 2 solutions x = " + x);
