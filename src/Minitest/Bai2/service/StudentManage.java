@@ -1,16 +1,23 @@
 package Minitest.Bai2.service;
 
 import Minitest.Bai2.model.ClassRoom;
-import Minitest.Bai2.service.ClassroomManage;
-import Minitest.Bai2.service.Manager;
 import Minitest.Bai2.model.Student;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class StudentManage implements Manager<Student> {
-    ArrayList<Student> arrayList = new ArrayList<>();
+    static ArrayList<Student> arrayList = new ArrayList<>();
     ClassroomManage classroomManage = new ClassroomManage();
+
+    public StudentManage() {
+        try {
+            readFileStudent();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Override
     public ArrayList<Student> addStudent() {
@@ -18,21 +25,22 @@ public class StudentManage implements Manager<Student> {
         System.out.println("Enter Name ");
         String name = scanner.nextLine();
         System.out.println("Enter Age ");
-        int age = Integer.parseInt(scanner.nextLine());
-        do  {
-            age= Integer.parseInt(scanner.nextLine());
-        }while (age < 6 || age > 60);
+        int age;
+        do {
+            age = Integer.parseInt(scanner.nextLine());
+        } while (age < 6 || age > 60);
         String gender = chooseGender();
         System.out.println("Enter point");
         double point;
-        do  {
-            point= Integer.parseInt(scanner.nextLine());
-        }while (point < 0 || point > 10);
+        do {
+            point = Integer.parseInt(scanner.nextLine());
+        } while (point < 0 || point > 10);
         classroomManage.displayClassroom();
         System.out.println("Enter Class");
         ClassRoom classes = classroomManage.chooseClassroom();
         Student student = new Student(name, age, gender, point, classes);
         arrayList.add(student);
+        writeFileStudent();
         return arrayList;
     }
 
@@ -47,18 +55,18 @@ public class StudentManage implements Manager<Student> {
                 String name = scanner.nextLine();
                 list.setName(name);
                 System.out.println("Enter Age ");
-                int age ;
-                do  {
-                    age= Integer.parseInt(scanner.nextLine());
-                }while (age < 6 || age > 60);
+                int age;
+                do {
+                    age = Integer.parseInt(scanner.nextLine());
+                } while (age < 6 || age > 60);
                 list.getAge(age);
                 String gender = chooseGender();
                 list.setGender(gender);
                 System.out.println("Enter point");
-                double point ;
-                do  {
-                    point= Integer.parseInt(scanner.nextLine());
-                }while (point < 0 || point > 10);
+                double point;
+                do {
+                    point = Integer.parseInt(scanner.nextLine());
+                } while (point < 0 || point > 10);
                 list.setAvgPoint(point);
                 classroomManage.displayClassroom();
                 System.out.println("Enter Class");
@@ -66,7 +74,7 @@ public class StudentManage implements Manager<Student> {
                 list.setClassRoom(classes);
             }
         }
-      return arrayList;
+        return arrayList;
     }
 
     @Override
@@ -165,7 +173,7 @@ public class StudentManage implements Manager<Student> {
                 maxPoint = student;
             }
         }
-        System.out.println("Highest point :" + maxPoint +" " + max);
+        System.out.println("Highest point :" + maxPoint + " " + max);
     }
 
     public void displayLowestScore() {
@@ -236,13 +244,48 @@ public class StudentManage implements Manager<Student> {
             }
         }
     }
-    public void addClass(){
+
+    public void addClass() {
         classroomManage.addClassroom();
     }
-    public void updateClass(){
+
+    public void updateClass() {
         classroomManage.updateClass();
     }
+
+    public void writeFileStudent() {
+        File file = new File("C:\\C0223i1\\Module2\\src\\Minitest\\Bai2\\Data\\Student");
+        try {
+            if (!file.exists()) {
+                throw new FileNotFoundException("Directory does not exist");
+            }
+            FileWriter fileWriter = new FileWriter(file);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            for (Student s : arrayList) {
+                bufferedWriter.write(s.toString() + "\n");
+            }
+            bufferedWriter.close();
+            fileWriter.close();
+        } catch (Exception e) {
+            System.out.println("Error :" + e.getMessage());
+        }
+    }
+
+    public void readFileStudent() throws IOException {
+        File file = new File("C:\\C0223i1\\Module2\\src\\Minitest\\Bai2\\Data\\Student");
+        FileReader fileReader = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        String student;
+        String[] str;
+        while ((student = bufferedReader.readLine()) != null) {
+            str = student.split(", ");
+            arrayList.add(new Student(str[1], Integer.parseInt(str[2]), str[3], Double.parseDouble(str[4]), new ClassRoom(str[5])));
+        }
+        bufferedReader.close();
+        fileReader.close();
+    }
 }
+
 
 
 

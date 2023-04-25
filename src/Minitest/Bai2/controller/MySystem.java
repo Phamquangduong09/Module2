@@ -1,6 +1,4 @@
 package Minitest.Bai2.controller;
-
-import Minitest.Bai2.service.ClassroomManage;
 import Minitest.Bai2.service.StudentManage;
 
 import java.util.Scanner;
@@ -23,6 +21,9 @@ public class MySystem {
             System.out.println("9. Display Student lowest score");
             System.out.println("10. Display Student rank");
             System.out.println("11. Display Student by gender");
+            System.out.println("12. Add Class");
+            System.out.println("13. Update Class");
+            System.out.println("0. Exit");
             System.out.println(" Enter choose");
             int choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
@@ -65,6 +66,8 @@ public class MySystem {
                 case 13:
                     studentManage.updateClass();
                     break;
+                case 0 :
+                    System.exit(0);
             }
         } while (true);
 

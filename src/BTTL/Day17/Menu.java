@@ -14,14 +14,20 @@ public class Menu {
             System.out.println("1 . Log in");
             System.out.println("2 . Register");
             System.out.println("Enter your selection");
-            int choice = Integer.parseInt(scanner.nextLine());
-            switch (choice) {
-                case 1:
-                    logIn();
-                    break;
-                case 2:
-                    register();
-                    break;
+            try {
+                int choice = Integer.parseInt(scanner.nextLine());
+                switch (choice) {
+                    case 1:
+                        logIn();
+                        break;
+                    case 2:
+                        register();
+                        break;
+                    case 0:
+                        System.exit(0);
+                }
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -70,7 +76,7 @@ public class Menu {
             }
         }
         readFile();
-        if(arrAccount.size()!= 0) {
+        if (arrAccount.size() != 0) {
             for (Account e : arrAccount) {
                 if (e.getUsername().equals(username) && e.getPass().equals(password)) {
                     System.out.println("Logged in successfully");
@@ -78,7 +84,7 @@ public class Menu {
                     System.out.println("Account or password error");
                 }
             }
-        }else {
+        } else {
             System.out.println("Account or password error");
         }
 
@@ -91,7 +97,7 @@ public class Menu {
                 throw new FileNotFoundException("Can't find directory");
             }
 
-            FileWriter fileWriter = new FileWriter(file,true);
+            FileWriter fileWriter = new FileWriter(file, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (Account account : arrAccount) {
                 bufferedWriter.write(account.toString() + "\n");
