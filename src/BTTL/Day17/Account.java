@@ -63,12 +63,6 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account "+
-                "id=" + id +
-                ", username='" + username +
-                ", pass='" + pass +
-                ", fullName='" + fullName +
-                ", phoneNumber='" + phoneNumber +
-                ", address='" + address ;
+        return id + username + pass +  fullName + phoneNumber + address ;
     }
 }

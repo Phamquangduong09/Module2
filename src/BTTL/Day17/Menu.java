@@ -91,7 +91,7 @@ public class Menu {
                 throw new FileNotFoundException("Can't find directory");
             }
 
-            FileWriter fileWriter = new FileWriter(file);
+            FileWriter fileWriter = new FileWriter(file,true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (Account account : arrAccount) {
                 bufferedWriter.write(account.toString() + "\n");
