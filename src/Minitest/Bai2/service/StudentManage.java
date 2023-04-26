@@ -15,7 +15,7 @@ public class StudentManage implements Manager<Student> {
         try {
             readFileStudent();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -72,23 +72,26 @@ public class StudentManage implements Manager<Student> {
                 System.out.println("Enter Class");
                 ClassRoom classes = classroomManage.chooseClassroom();
                 list.setClassRoom(classes);
+                writeFileStudent();
             }
         }
         return arrayList;
     }
 
     @Override
-    public Student deleteStudent() {
+    public Student deleteStudent() throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter id delete");
         int idDelete = Integer.parseInt(scanner.nextLine());
         Student student = getStudent(idDelete);
         if (student != null) {
             arrayList.remove(student);
+            writeFileStudent();
             return student;
         } else {
             return null;
         }
+
     }
 
     @Override
@@ -137,7 +140,7 @@ public class StudentManage implements Manager<Student> {
         return gender;
     }
 
-    public void displayStudentById() {
+    public void displayStudentById() throws IOException {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the id you want to find");
         int idToFind = Integer.parseInt(sc.nextLine());
@@ -150,7 +153,7 @@ public class StudentManage implements Manager<Student> {
 
     }
 
-    public void displayStudentByClass() {
+    public void displayStudentByClass() throws IOException {
         Scanner scanner = new Scanner(System.in);
         classroomManage.displayClassroom();
         System.out.println("Enter the classroom you want to display");
@@ -164,7 +167,7 @@ public class StudentManage implements Manager<Student> {
 
     }
 
-    public void displayHighestPoint() {
+    public void displayHighestPoint() throws IOException {
         double max = arrayList.get(0).getAvgPoint();
         Student maxPoint = arrayList.get(0);
         for (Student student : arrayList) {
@@ -176,7 +179,8 @@ public class StudentManage implements Manager<Student> {
         System.out.println("Highest point :" + maxPoint + " " + max);
     }
 
-    public void displayLowestScore() {
+    public void displayLowestScore() throws IOException {
+
         double min = arrayList.get(0).getAvgPoint();
         Student minPoint = arrayList.get(0);
         for (Student student : arrayList) {
@@ -188,7 +192,7 @@ public class StudentManage implements Manager<Student> {
         System.out.println("Lowest score" + minPoint + " " + min);
     }
 
-    public void displayRank() {
+    public void displayRank() throws IOException {
         for (Student student : arrayList) {
             if (student.getAvgPoint() > 8.0) {
                 System.out.println(student + " Rank :  Good standing");
@@ -202,7 +206,7 @@ public class StudentManage implements Manager<Student> {
         }
     }
 
-    public void displayStudentByGender() {
+    public void displayStudentByGender() throws IOException {
         System.out.println("Select the gender you want to display");
         System.out.println("1. Male");
         System.out.println("2. Female");
@@ -278,8 +282,8 @@ public class StudentManage implements Manager<Student> {
         String student;
         String[] str;
         while ((student = bufferedReader.readLine()) != null) {
-            str = student.split(", ");
-            arrayList.add(new Student(str[1], Integer.parseInt(str[2]), str[3], Double.parseDouble(str[4]), new ClassRoom(str[5])));
+            str = student.split(",");
+            arrayList.add(new Student(str[1], Integer.parseInt(str[2]), str[3], Double.parseDouble(str[4]), new ClassRoom(str[6])));
         }
         bufferedReader.close();
         fileReader.close();

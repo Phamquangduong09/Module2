@@ -32,6 +32,6 @@ public class ClassRoom {
 
     @Override
     public String toString() {
-        return id + name;
+        return id +","+ name;
     }
 }

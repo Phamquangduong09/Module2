@@ -1,10 +1,11 @@
 package Minitest.Bai2.controller;
 import Minitest.Bai2.service.StudentManage;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class MySystem {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         StudentManage studentManage = new StudentManage();
         Scanner scanner = new Scanner(System.in);
 

@@ -1,5 +1,6 @@
 package Minitest.Bai2.service;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface Manager<E> {
@@ -7,7 +8,7 @@ public interface Manager<E> {
 
     List<E> updateStudent();
 
-    E deleteStudent();
+    E deleteStudent() throws IOException;
 
     void search();
 
