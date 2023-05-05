@@ -7,6 +7,7 @@ public class Menu {
         Scanner scanner = new Scanner(System.in);
         BrandManager brandManager = new BrandManager();
         ProductManager productManager = new ProductManager(brandManager);
+        CartManager cartManager = new CartManager(productManager);
         do {
             System.out.println("---MENU---");
             System.out.println("1. Display Product");
@@ -17,6 +18,8 @@ public class Menu {
             System.out.println("6. Sort by name");
             System.out.println("7. Sort by price");
             System.out.println("8. Menu Brand");
+            System.out.println("9. Cart");
+            System.out.println("10. Display cart");
             System.out.println("0. Exit");
             System.out.println("Enter the number you want to choose");
             int choice = Integer.parseInt(scanner.nextLine());
@@ -44,6 +47,12 @@ public class Menu {
                     break;
                 case 8:
                     menuBrand(scanner, brandManager);
+                    break;
+                case 9:
+                    cartManager.shopping();
+                    break;
+                case 10:
+                    cartManager.displayCart();
                     break;
                 case 0:
                     System.exit(0);

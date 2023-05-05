@@ -17,7 +17,7 @@ public class ProductManager implements Manager, Feature {
         scanner = new Scanner(System.in);
         this.brandManager = brandManager;
         fileManager = new FileManager();
-        fileManager.readFileProduct(productList);
+        fileManager.readFileProduct(productList, brandManager);
         checkDefaultIndex();
     }
 

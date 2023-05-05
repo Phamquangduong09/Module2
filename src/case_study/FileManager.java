@@ -5,16 +5,18 @@ import java.util.List;
 
 
 public class FileManager {
-    public void readFileProduct(List<Product> productList) {
+    public void readFileProduct(List<Product> productList, BrandManager brandManager) {
         File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\Product");
+
         try {
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String string;
             while ((string = bufferedReader.readLine()) != null) {
                 String[] arrProduct = string.split(",");
+                Brand brand = brandManager.getByNameBrand(arrProduct[4]);
                 Product product = new Product(Integer.parseInt(arrProduct[0]), arrProduct[1], Double.parseDouble(arrProduct[2]),
-                        new Brand(arrProduct[4]), arrProduct[5]);
+                        brand, arrProduct[5]);
                 productList.add(product);
             }
             bufferedReader.close();

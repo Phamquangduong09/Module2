@@ -11,7 +11,6 @@ public class BrandManager implements Manager {
     Brand brand;
 
 
-
     public List<Brand> getBrandList() {
         return brandList;
     }
@@ -43,7 +42,7 @@ public class BrandManager implements Manager {
 
     @Override
     public List<Brand> update() {
-        int idUpdate =0;
+        int idUpdate = 0;
         int count = 0;
         display();
         do {
@@ -72,7 +71,7 @@ public class BrandManager implements Manager {
     public List<Brand> delete() {
         display();
         int count = 0;
-        int idDelete ;
+        int idDelete;
         System.out.println("Enter the id you want to delete ");
         idDelete = Integer.parseInt(scanner.nextLine());
         for (int i = 0; i < brandList.size(); i++) {
@@ -91,6 +90,7 @@ public class BrandManager implements Manager {
             System.out.println(b);
         }
     }
+
     public Brand getByIdBrand() {
         int idBrand;
         do {
@@ -102,19 +102,29 @@ public class BrandManager implements Manager {
                 System.err.println("Have error, please try again!");
             }
         } while (true);
-        for (Brand b: brandList) {
+        for (Brand b : brandList) {
             if (b.getId() == idBrand) {
                 return b;
             }
         }
         return null;
     }
+
     private void checkDefaultIndex() {
         if (brandList.isEmpty()) {
             Brand.idUp1 = 0;
         } else {
             Brand.idUp1 = brandList.get(brandList.size() - 1).getId();
         }
+    }
+
+    public Brand getByNameBrand(String name) {
+        for (Brand b : brandList) {
+            if (b.getBrandName().equals(name)) {
+                return b;
+            }
+        }
+        return null;
     }
 
 }
