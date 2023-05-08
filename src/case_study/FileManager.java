@@ -75,6 +75,34 @@ public class FileManager {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-
     }
+
+    public void writeFileCart(List<ShoppingCart> shoppingCarts) {
+        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\Cart");
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(shoppingCarts);
+            objectOutputStream.close();
+            fileOutputStream.close();
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void readFileCart(List<ShoppingCart> shoppingCarts) {
+        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\Cart");
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            shoppingCarts = (List<ShoppingCart>) objectInputStream.readObject();
+            objectInputStream.close();
+            fileInputStream.close();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
 }

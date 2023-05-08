@@ -1,10 +1,12 @@
 package case_study;
 
+import java.io.Serializable;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
-public class Cart {
+public class Cart implements Serializable {
     private int id;
+    public static int idUpCart;
     private String name;
     private LocalDate date;
     private boolean isPaid;
@@ -13,7 +15,7 @@ public class Cart {
     }
 
     public Cart(String name) {
-        this.id = 1;
+        this.id = ++idUpCart;
         this.name = name;
         this.date = LocalDate.now();
         this.isPaid = false;
@@ -54,6 +56,6 @@ public class Cart {
 
     @Override
     public String toString() {
-        return id + "," + name + ","+ date  ;
+        return id + "," + name + "," + date;
     }
 }

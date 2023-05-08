@@ -169,4 +169,56 @@ public class ProductManager implements Manager, Feature {
         }
     }
 
+    public void filter() {
+        double lowestPrice;
+        double highestPrice;
+        String name = "";
+        do {
+            try {
+                System.out.println("Enter Lowest price");
+                String a = scanner.nextLine();
+                if (a.equals("")) {
+                    lowestPrice = 0;
+                } else {
+                    lowestPrice = Double.parseDouble(a);
+                }
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (true);
+        do {
+            try {
+                System.out.println("Enter highest price");
+                String price = scanner.nextLine();
+                if (price.equals("")) {
+                    highestPrice = Double.MAX_VALUE;
+                    break;
+                } else {
+                    highestPrice = Double.parseDouble(price);
+                    if (highestPrice > lowestPrice) {
+                        break;
+                    }
+                }
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
+            }
+            System.out.println("Enter name brand");
+            name = scanner.nextLine();
+        } while (true);
+        filterPrice(lowestPrice,highestPrice,name);
+    }
+
+    public void filterPrice(double lowestPrice, double highestPrice, String name) {
+        for (Product s : productList) {
+            if (lowestPrice < s.getPrice() && s.getPrice() < highestPrice) {
+                if(!name.equals("") && s.getBrand().getBrandName().contains(name)){
+                    System.out.println(s);
+                }else {
+                    System.out.println(s);
+                }
+
+            }
+        }
+    }
 }

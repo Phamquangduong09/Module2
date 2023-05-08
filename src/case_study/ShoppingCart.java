@@ -1,7 +1,11 @@
 package case_study;
 
-public class ShoppingCart {
+import java.io.Serializable;
+
+public class ShoppingCart implements Serializable {
+    public static final long serialVersionUID = 1L;
     private int id;
+    public static int idUpShoppingCart;
     private Cart idCart;
     private Product product;
     private int quantity;
@@ -10,7 +14,7 @@ public class ShoppingCart {
     }
 
     public ShoppingCart(Cart idCart, Product product, int quantity) {
-        this.id = id;
+        this.id = ++idUpShoppingCart;
         this.idCart = idCart;
         this.product = product;
         this.quantity = quantity;
@@ -50,6 +54,6 @@ public class ShoppingCart {
 
     @Override
     public String toString() {
-        return id +"," + idCart + "," + product + "," + quantity ;
+        return id + "," + idCart + "," + product + "," + quantity;
     }
 }

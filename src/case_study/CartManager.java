@@ -9,15 +9,18 @@ public class CartManager {
     List<Cart> carts;
     List<ShoppingCart> shoppingCarts;
     ProductManager productManager;
+    FileManager fileManager;
 
     public CartManager(ProductManager productManager) {
+        fileManager = new FileManager();
         carts = new ArrayList<>();
-        shoppingCarts = new ArrayList<>();
+        fileManager.readFileCart(shoppingCarts);
         this.productManager = productManager;
+        checkDefaultIndex();
     }
 
     public void shopping() {
-        System.out.println("Enter name: ");
+        System.out.println("Enter buyer's name: ");
         String name = scanner.nextLine();
         Cart cart = new Cart(name);
         for (Cart c : carts) {
@@ -42,7 +45,39 @@ public class CartManager {
         for (ShoppingCart s : shoppingCarts) {
             sum += s.getProduct().getPrice() * s.getQuantity();
             System.out.println(s);
-            System.out.println(sum);
+        }
+        System.out.println(sum);
+    }
+
+    public void deleteCart() {
+        int id;
+        boolean flag = false;
+        do {
+            try {
+                System.out.println("Enter id you want: ");
+                id = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.err.println("Have error, please try again!");
+            }
+        } while (true);
+        for (int i = 0; i < shoppingCarts.size(); i++) {
+            if (id == shoppingCarts.get(i).getId()) {
+                shoppingCarts.remove(i);
+                flag = true;
+            }
+        }
+        if (flag) {
+            System.out.println("No id you want to delete");
+        }
+        fileManager.writeFileCart(shoppingCarts);
+    }
+
+    private void checkDefaultIndex() {
+        if (shoppingCarts.isEmpty()) {
+            ShoppingCart.idUpShoppingCart = 0;
+        } else {
+            Product.idUp = shoppingCarts.get(shoppingCarts.size() - 1).getId();
         }
     }
 
