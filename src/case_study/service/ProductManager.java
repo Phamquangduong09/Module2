@@ -1,4 +1,11 @@
-package case_study;
+package case_study.service;
+
+import case_study.model.Brand;
+import case_study.model.Product;
+import case_study.service.BrandManager;
+import case_study.service.Feature;
+import case_study.service.FileManager;
+import case_study.service.Manager;
 
 import java.util.ArrayList;
 import java.util.Comparator;

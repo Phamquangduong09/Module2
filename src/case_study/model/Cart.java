@@ -1,7 +1,7 @@
-package case_study;
+package case_study.model;
 
 import java.io.Serializable;
-import java.time.DateTimeException;
+
 import java.time.LocalDate;
 
 public class Cart implements Serializable {

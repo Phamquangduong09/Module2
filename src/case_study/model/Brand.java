@@ -1,4 +1,4 @@
-package case_study;
+package case_study.model;
 
 public class Brand {
     private int id;

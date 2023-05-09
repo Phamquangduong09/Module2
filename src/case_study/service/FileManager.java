@@ -1,4 +1,9 @@
-package case_study;
+package case_study.service;
+
+import case_study.model.Account;
+import case_study.model.Product;
+import case_study.model.Brand;
+import case_study.model.ShoppingCart;
 
 import java.io.*;
 import java.util.List;
@@ -6,7 +11,7 @@ import java.util.List;
 
 public class FileManager {
     public void readFileProduct(List<Product> productList, BrandManager brandManager) {
-        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\Product");
+        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\data\\Product");
 
         try {
             FileReader fileReader = new FileReader(file);
@@ -29,7 +34,7 @@ public class FileManager {
     }
 
     public void writeFileProduct(List<Product> productList) {
-        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\Product");
+        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\data\\Product");
         try {
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -44,7 +49,7 @@ public class FileManager {
     }
 
     public void writeFileBrand(List<Brand> brandList) {
-        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\Brand");
+        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\data\\Brand");
         try {
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -59,7 +64,7 @@ public class FileManager {
     }
 
     public void readFileBrand(List<Brand> brandList) {
-        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\Brand");
+        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\data\\Brand");
         try {
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -78,7 +83,7 @@ public class FileManager {
     }
 
     public void writeFileCart(List<ShoppingCart> shoppingCarts) {
-        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\Cart");
+        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\data\\Cart");
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -92,7 +97,7 @@ public class FileManager {
     }
 
     public void readFileCart(List<ShoppingCart> shoppingCarts) {
-        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\Cart");
+        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\data\\Cart");
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
@@ -104,5 +109,30 @@ public class FileManager {
         }
     }
 
+    public void writeFileAccount(List<Account> accountList) {
+        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\data\\Account");
+        try{
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(accountList);
+            objectOutputStream.close();
+            fileOutputStream.close();
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void readFileAccount(List<Account> accountList) {
+        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\data\\Account");
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            accountList = (List<Account>) objectInputStream.readObject();
+            objectInputStream.close();
+            fileInputStream.close();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 }

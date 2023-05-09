@@ -1,4 +1,6 @@
-package case_study;
+package case_study.model;
+
+
 
 import java.io.Serializable;
 

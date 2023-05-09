@@ -1,4 +1,8 @@
-package case_study;
+package case_study.service;
+
+import case_study.model.Product;
+import case_study.model.Cart;
+import case_study.model.ShoppingCart;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +18,7 @@ public class CartManager {
     public CartManager(ProductManager productManager) {
         fileManager = new FileManager();
         carts = new ArrayList<>();
+        shoppingCarts = new ArrayList<>();
         fileManager.readFileCart(shoppingCarts);
         this.productManager = productManager;
         checkDefaultIndex();

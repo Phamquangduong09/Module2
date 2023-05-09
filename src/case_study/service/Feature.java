@@ -1,4 +1,4 @@
-package case_study;
+package case_study.service;
 
 public interface Feature {
     void sortByName();

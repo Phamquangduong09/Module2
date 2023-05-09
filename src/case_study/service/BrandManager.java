@@ -1,4 +1,6 @@
-package case_study;
+package case_study.service;
+
+import case_study.model.Brand;
 
 import java.util.ArrayList;
 import java.util.List;

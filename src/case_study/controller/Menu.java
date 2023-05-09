@@ -1,4 +1,10 @@
-package case_study;
+package case_study.controller;
+
+import case_study.model.Account;
+import case_study.service.AccountManager;
+import case_study.service.BrandManager;
+import case_study.service.CartManager;
+import case_study.service.ProductManager;
 
 import java.util.Scanner;
 
@@ -8,11 +14,13 @@ public class Menu {
         BrandManager brandManager = new BrandManager();
         ProductManager productManager = new ProductManager(brandManager);
         CartManager cartManager = new CartManager(productManager);
+        AccountManager accountManager = new AccountManager();
         int choice = -1;
         do {
             System.out.println("---MENU---");
             System.out.println("1 . Login");
-            System.out.println("2 . Client");
+            System.out.println("2 . Register");
+            System.out.println("3 . Client");
             System.out.println("Enter your selection");
             try {
                 choice = Integer.parseInt(scanner.nextLine());
@@ -21,8 +29,12 @@ public class Menu {
             }
             switch (choice) {
                 case 1:
+                    accountManager.login();
                     break;
                 case 2:
+                    accountManager.creatNewAccount();
+                    break;
+                case 3:
                     menuClient(productManager, scanner, cartManager);
                     break;
             }
@@ -127,13 +139,36 @@ public class Menu {
         } while (choice != 0);
     }
 
-    public static void menuAdmin() {
+    public static void menuAdmin(Scanner scanner, ProductManager productManager, BrandManager brandManager) {
         int choice = -1;
-        System.out.println("-- Hello Admin --");
-        System.out.println("1 . Add Product");
-        System.out.println("2 . Update Product");
-        System.out.println("3 . Delete Product");
-        System.out.println("4 . Menu Brand");
+        do {
+            System.out.println("-- Hello Admin --");
+            System.out.println("1 . Add Product");
+            System.out.println("2 . Update Product");
+            System.out.println("3 . Delete Product");
+            System.out.println("4 . Menu Brand");
+            System.out.println("0. Exit");
+            System.out.println("Enter your selection");
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter the number !!");
+            }
+            switch (choice) {
+                case 1:
+                    productManager.add();
+                    break;
+                case 2:
+                    productManager.update();
+                    break;
+                case 3:
+                    productManager.delete();
+                    break;
+                case 4:
+                    menuBrand(scanner, brandManager);
+            }
+        } while (choice != 0);
+
 
     }
 
