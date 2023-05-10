@@ -139,5 +139,30 @@ public class FileManager {
         }
         return accountList;
     }
+    public  Account readFileAccountLogIn() {
+        List<Account> accountList = new ArrayList<>();
+        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\data\\AccountLogIn.txt");
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            accountList = (List<Account>) objectInputStream.readObject();
+            objectInputStream.close();
+            fileInputStream.close();
+        } catch (IOException | ClassNotFoundException ignored) {
+        }
+        return accountList.get(0);
+    }
+    public void writeFileAccountLogIn(List<Account> accountList) {
+        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\data\\AccountLogIn.txt");
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(accountList);
+            objectOutputStream.close();
+            fileOutputStream.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 }

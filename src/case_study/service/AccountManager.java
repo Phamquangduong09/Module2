@@ -92,10 +92,11 @@ public class AccountManager {
 
     public String login() {
         int count = 0;
+        String user;
         do {
             count++;
             System.out.println("Enter account");
-            String user = scanner.nextLine();
+            user = scanner.nextLine();
             System.out.println("Enter password");
             String pass = scanner.nextLine();
             if (user.equals("admin") && pass.equals("123")) {
@@ -105,12 +106,15 @@ public class AccountManager {
                 for (Account a : accountList) {
                     if (a.getUserName().equals(user) && a.getPassword().equals(pass)) {
                         System.out.println("Logged in successfully");
+                        ArrayList<Account> loggingUser = new ArrayList<>();
+                        Account account = getAccountUserName(user);
+                        loggingUser.add(account);
+                        fileManager.writeFileAccountLogIn(loggingUser);
                         return user;
                     }
                 }
             }
         } while (count < 4);
-
         return null;
     }
 
@@ -120,5 +124,14 @@ public class AccountManager {
         } else {
             Account.idUpAccount = accountList.get(accountList.size() - 1).getId();
         }
+    }
+
+    public Account getAccountUserName(String username) {
+        for (Account account : accountList) {
+            if (account.getUserName().equals(username)) {
+                return account;
+            }
+        }
+        return null;
     }
 }

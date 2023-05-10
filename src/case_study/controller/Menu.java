@@ -87,7 +87,7 @@ public class Menu {
             System.out.println("3 . Search");
             System.out.println("4 . Filter");
             System.out.println("5 . Cart");
-            System.out.println("0. Exit");
+            System.out.println("0. Logout");
             System.out.println("Enter your selection");
 
             try {
@@ -157,7 +157,7 @@ public class Menu {
             System.out.println("3 . Delete Product");
             System.out.println("4 . Menu Brand");
             System.out.println("5 . Store Revenue");
-            System.out.println("0. Exit");
+            System.out.println("0. Logout");
             System.out.println("Enter your selection");
             try {
                 choice = Integer.parseInt(scanner.nextLine());

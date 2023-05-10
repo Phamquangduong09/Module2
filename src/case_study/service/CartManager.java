@@ -25,8 +25,7 @@ public class CartManager {
     }
 
     public void shopping() {
-        System.out.println("Enter buyer's name: ");
-        String name = scanner.nextLine();
+        String name = fileManager.readFileAccountLogIn().getUserName();
         Cart cart = new Cart(name);
         for (Cart c : carts) {
             if (c.getName().equals(name) && !c.isPaid()) {
@@ -58,12 +57,15 @@ public class CartManager {
 
     public void displayCart() {
         double sum = 0;
+        String userName = fileManager.readFileAccountLogIn().getUserName();
         System.out.printf("%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%s",
                 "Id", "UserName", "Date-buy", "id-Pro", "Name-Product", "Brand", "Price", "Description", "Quantity\n");
         for (ShoppingCart s : shoppingCarts) {
             if (!s.getIdCart().isPaid()) {
-                sum += s.getProduct().getPrice() * s.getQuantity();
-                s.display();
+                if (userName.equals(s.getIdCart().getName())){
+                    sum += s.getProduct().getPrice() * s.getQuantity();
+                    s.display();
+                }
             }
 
         }
@@ -106,17 +108,18 @@ public class CartManager {
         for (ShoppingCart shoppingCart : shoppingCarts) {
             shoppingCart.getIdCart().setPaid(true);
             System.out.println("Payment success");
+            fileManager.writeFileCart(shoppingCarts);
         }
     }
 
     public void totalToPay() {
-        double sum = 0;
+        double totalMoney = 0;
         for (ShoppingCart s : shoppingCarts) {
             if (s.getIdCart().isPaid() == true) {
-                sum += s.getProduct().getPrice();
+                totalMoney += s.getProduct().getPrice() * s.getQuantity();
                 s.display();
             }
-            System.out.println("Total store revenue is :" + sum);
+            System.out.println("Total store revenue is :" + totalMoney);
         }
     }
 

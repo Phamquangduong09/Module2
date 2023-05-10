@@ -78,7 +78,7 @@ public class Product implements Serializable {
         return id + "," + name + "," + price + "," + brand + "," + describe;
     }
     public void display() {
-        System.out.printf("%-15s%-15s%-15s%-18s%s",
+        System.out.printf("%-15s%-25s%-15s%-18s%s",
                 this.id, this.name, this.brand.getBrandName(), this.price, this.describe + "\n");
     }
 }

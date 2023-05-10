@@ -2,10 +2,7 @@ package case_study.service;
 
 import case_study.model.Brand;
 import case_study.model.Product;
-import case_study.service.BrandManager;
-import case_study.service.Feature;
-import case_study.service.FileManager;
-import case_study.service.Manager;
+
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -100,7 +97,7 @@ public class ProductManager implements Manager, Feature {
 
     @Override
     public void display() {
-        System.out.printf("%-15s%-15s%-15s%-18s%s",
+        System.out.printf("%-15s%-25s%-15s%-18s%s",
                 "Id", "Name", "Brand", "Price", "Description\n");
 
         for (Product p : productList) {
@@ -116,6 +113,7 @@ public class ProductManager implements Manager, Feature {
                 return o1.getName().compareTo(o2.getName());
             }
         });
+        display();
     }
 
     @Override
@@ -126,6 +124,7 @@ public class ProductManager implements Manager, Feature {
                 return (int) (o1.getPrice() - o2.getPrice());
             }
         });
+        display();
     }
 
     @Override
@@ -179,15 +178,15 @@ public class ProductManager implements Manager, Feature {
     public void filter() {
         double lowestPrice;
         double highestPrice;
-        String name ="";
+        String name = "";
         do {
             try {
                 System.out.println("Enter Lowest price");
-                String a = scanner.nextLine();
-                if (a.equals("")) {
+                String price1 = scanner.nextLine();
+                if (price1.equals("")) {
                     lowestPrice = 0;
                 } else {
-                    lowestPrice = Double.parseDouble(a);
+                    lowestPrice = Double.parseDouble(price1);
                 }
                 break;
             } catch (NumberFormatException e) {
@@ -210,22 +209,36 @@ public class ProductManager implements Manager, Feature {
             } catch (NumberFormatException e) {
                 System.out.println(e.getMessage());
             }
-            System.out.println("Enter name brand");
-            name = scanner.nextLine();
+
         } while (true);
-        filterPrice(lowestPrice,highestPrice,name);
+        System.out.println("Enter name brand");
+        name = scanner.nextLine();
+        if (!name.equals("")) {
+            filterPrice(lowestPrice, highestPrice, name);
+        } else {
+            filterPrice(lowestPrice, highestPrice);
+        }
+
+
     }
 
     public void filterPrice(double lowestPrice, double highestPrice, String name) {
         for (Product s : productList) {
             if (lowestPrice < s.getPrice() && s.getPrice() < highestPrice) {
-                if(!name.equals("") && s.getBrand().getBrandName().contains(name)){
-                   s.display();
-                }else {
-                   s.display();
-                }
+                if (!name.equals("") && s.getBrand().getBrandName().contains(name)) {
+                    s.display();
 
+                }
             }
         }
     }
+
+    public void filterPrice(double lowestPrice, double highestPrice) {
+        for (Product s : productList) {
+            if (lowestPrice < s.getPrice() && s.getPrice() < highestPrice) {
+                s.display();
+            }
+        }
+    }
+
 }
