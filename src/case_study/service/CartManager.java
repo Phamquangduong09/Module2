@@ -72,6 +72,7 @@ public class CartManager {
     }
 
     public void deleteCart() {
+        displayCart();
         int id;
         boolean flag = false;
         do {
@@ -89,7 +90,7 @@ public class CartManager {
                 flag = true;
             }
         }
-        if (flag) {
+        if (!flag) {
             System.out.println("No id you want to delete");
         }
         fileManager.writeFileCart(shoppingCarts);

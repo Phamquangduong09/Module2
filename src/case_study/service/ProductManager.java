@@ -49,6 +49,7 @@ public class ProductManager implements Manager, Feature {
         Product product = new Product(name, price, brand, describe);
         productList.add(product);
         fileManager.writeFileProduct(productList);
+        display();
         return productList;
     }
 
@@ -82,6 +83,7 @@ public class ProductManager implements Manager, Feature {
             product.setDescribe(describe);
         }
         fileManager.writeFileProduct(productList);
+        display();
         return productList;
     }
 
@@ -92,6 +94,7 @@ public class ProductManager implements Manager, Feature {
             productList.remove(product);
         }
         fileManager.writeFileProduct(productList);
+        display();
         return productList;
     }
 
@@ -218,8 +221,6 @@ public class ProductManager implements Manager, Feature {
         } else {
             filterPrice(lowestPrice, highestPrice);
         }
-
-
     }
 
     public void filterPrice(double lowestPrice, double highestPrice, String name) {
