@@ -28,14 +28,14 @@ public class Menu {
             }
             switch (choice) {
                 case 1:
-                    String result = accountManager.login();
-                    if (result.equals("admin")) {
-                        menuAdmin(scanner, productManager, brandManager,cartManager);
-                    } else if (result != null) {
-                        menuClient(productManager,scanner,cartManager);
-                    }else {
-                        System.out.println("no");
-                    }
+                        String result = accountManager.login();
+                        if (result == null) {
+                            System.out.println("Login failed");
+                        } else if (result.equals("admin")) {
+                              menuAdmin(scanner, productManager, brandManager, cartManager);
+                        } else {
+                            menuClient(productManager, scanner, cartManager);
+                        }
                     break;
                 case 2:
                     accountManager.creatNewAccount();

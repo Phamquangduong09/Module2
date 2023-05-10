@@ -1,8 +1,6 @@
 package case_study.service;
 
 import case_study.model.Account;
-import case_study.model.Product;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,8 +9,6 @@ public class AccountManager {
     Scanner scanner;
     List<Account> accountList;
     FileManager fileManager;
-    private Account currentAccount;
-
     public AccountManager() {
         scanner = new Scanner(System.in);
         fileManager = new FileManager();
@@ -91,30 +87,25 @@ public class AccountManager {
     }
 
     public String login() {
-        int count = 0;
-        String user;
-        do {
-            count++;
-            System.out.println("Enter account");
-            user = scanner.nextLine();
-            System.out.println("Enter password");
-            String pass = scanner.nextLine();
-            if (user.equals("admin") && pass.equals("123")) {
-                System.out.println(" Hello admin!!!");
-                return "admin";
-            } else {
-                for (Account a : accountList) {
-                    if (a.getUserName().equals(user) && a.getPassword().equals(pass)) {
-                        System.out.println("Logged in successfully");
-                        ArrayList<Account> loggingUser = new ArrayList<>();
-                        Account account = getAccountUserName(user);
-                        loggingUser.add(account);
-                        fileManager.writeFileAccountLogIn(loggingUser);
-                        return user;
-                    }
+        System.out.println("Enter account");
+        String user = scanner.nextLine();
+        System.out.println("Enter password");
+        String pass = scanner.nextLine();
+        if (user.equals("admin") && pass.equals("123")) {
+            System.out.println(" Hello admin!!!");
+            return "admin";
+        } else {
+            for (Account a : accountList) {
+                if (a.getUserName().equals(user) && a.getPassword().equals(pass)) {
+                    System.out.println("Logged in successfully");
+                    ArrayList<Account> loggingUser = new ArrayList<>();
+                    Account account = getAccountUserName(user);
+                    loggingUser.add(account);
+                    fileManager.writeFileAccountLogIn(loggingUser);
+                    return user;
                 }
             }
-        } while (count < 4);
+        }
         return null;
     }
 
