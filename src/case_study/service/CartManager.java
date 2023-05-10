@@ -61,7 +61,7 @@ public class CartManager {
         System.out.printf("%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%s",
                 "Id", "UserName", "Date-buy", "id-Pro", "Name-Product", "Brand", "Price", "Description", "Quantity\n");
         for (ShoppingCart s : shoppingCarts) {
-            if (!s.getIdCart().isPaid()) {
+            if (!s.getIdCart().isPaid()){
                 if (userName.equals(s.getIdCart().getName())) {
                     sum += s.getProduct().getPrice() * s.getQuantity();
                     s.display();
@@ -117,6 +117,8 @@ public class CartManager {
 
     public void totalToPay() {
         double totalMoney = 0;
+        System.out.printf("%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%s",
+                "Id", "UserName", "Date-buy", "Id-Pro", "Name-Product", "Brand", "Price", "Description", "Quantity\n");
         for (ShoppingCart s : shoppingCarts) {
             if (s.getIdCart().isPaid() == true) {
                 totalMoney += s.getProduct().getPrice() * s.getQuantity();
