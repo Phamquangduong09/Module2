@@ -2,7 +2,10 @@ package case_study.model;
 
 import case_study.model.Brand;
 
-public class Product {
+import java.io.Serializable;
+
+
+public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
     private int id;
     public static int idUp;
@@ -22,13 +25,13 @@ public class Product {
         this.describe = describe;
     }
 
-//    public Product(int id, String name, double price, Brand brand, String describe) {
-//        this.id = id;
-//        this.price = price;
-//        this.name = name;
-//        this.brand = brand;
-//        this.describe = describe;
-//    }
+    public Product(int id, String name, double price, Brand brand, String describe) {
+        this.id = id;
+        this.price = price;
+        this.name = name;
+        this.brand = brand;
+        this.describe = describe;
+    }
 
     public int getId() {
         return id;

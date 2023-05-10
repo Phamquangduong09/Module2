@@ -6,7 +6,7 @@ public class Account implements Serializable {
     static final long serialVersionUID = 1L;
 
     private int id;
-    private int idUpAccount;
+    public  static  int idUpAccount;
     private String userName;
     private String password;
     private String fullName;

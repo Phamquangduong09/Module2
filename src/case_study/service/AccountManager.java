@@ -15,9 +15,8 @@ public class AccountManager {
 
     public AccountManager() {
         scanner = new Scanner(System.in);
-        accountList = new ArrayList<>();
         fileManager = new FileManager();
-        fileManager.readFileAccount(accountList);
+        accountList = fileManager.readFileAccount();
         checkDefaultIndex();
     }
 
@@ -48,9 +47,9 @@ public class AccountManager {
         String password;
         do {
             try {
-                password = scanner.nextLine();
                 System.out.println("password must contain at least 8 characters with " +
                         "1 uppercase letter, 1 lowercase letter and 1 special character.");
+                password = scanner.nextLine();
                 String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
                 if (password.matches(regex)) {
                     break;
@@ -85,13 +84,13 @@ public class AccountManager {
                 System.out.println(e.getMessage());
             }
         } while (true);
-        System.out.println(" Account successfully created !!");
+        System.out.println(" Account.txt successfully created !!");
         Account account = new Account(userName, password, fullName, phoneNumber);
         accountList.add(account);
         fileManager.writeFileAccount(accountList);
     }
 
-    public void login() {
+    public String login() {
         int count = 0;
         do {
             count++;
@@ -101,23 +100,25 @@ public class AccountManager {
             String pass = scanner.nextLine();
             if (user.equals("admin") && pass.equals("123")) {
                 System.out.println(" Hello admin!!!");
-                break;
+                return "admin";
             } else {
                 for (Account a : accountList) {
                     if (a.getUserName().equals(user) && a.getPassword().equals(pass)) {
                         System.out.println("Logged in successfully");
-                        break;
+                        return user;
                     }
                 }
             }
         } while (count < 4);
+
+        return null;
     }
 
     private void checkDefaultIndex() {
         if (accountList.isEmpty()) {
-            Product.idUp = 0;
+            Account.idUpAccount = 0;
         } else {
-            Product.idUp = accountList.get(accountList.size() - 1).getId();
+            Account.idUpAccount = accountList.get(accountList.size() - 1).getId();
         }
     }
 }

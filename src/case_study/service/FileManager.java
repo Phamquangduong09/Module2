@@ -6,6 +6,7 @@ import case_study.model.Brand;
 import case_study.model.ShoppingCart;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,7 +29,7 @@ public class FileManager {
             fileReader.close();
 
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            System.out.println();
         }
 
     }
@@ -83,7 +84,7 @@ public class FileManager {
     }
 
     public void writeFileCart(List<ShoppingCart> shoppingCarts) {
-        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\data\\Cart");
+        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\data\\Cart.txt");
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -96,8 +97,8 @@ public class FileManager {
         }
     }
 
-    public void readFileCart(List<ShoppingCart> shoppingCarts) {
-        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\data\\Cart");
+    public List<ShoppingCart> readFileCart(List<ShoppingCart> shoppingCarts) {
+        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\data\\Cart.txt");
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
@@ -105,13 +106,13 @@ public class FileManager {
             objectInputStream.close();
             fileInputStream.close();
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println(e.getMessage());
         }
+        return shoppingCarts;
     }
 
     public void writeFileAccount(List<Account> accountList) {
-        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\data\\Account");
-        try{
+        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\data\\Account.txt");
+        try {
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(accountList);
@@ -122,17 +123,21 @@ public class FileManager {
             System.out.println(e.getMessage());
         }
     }
-    public void readFileAccount(List<Account> accountList) {
-        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\data\\Account");
+
+    public  List<Account> readFileAccount() {
+        List<Account> accountList = new ArrayList<>();
+        File file = new File("C:\\C0223i1\\Module2\\src\\case_study\\data\\Account.txt");
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             accountList = (List<Account>) objectInputStream.readObject();
             objectInputStream.close();
             fileInputStream.close();
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println(e.getMessage());
+        } catch (IOException e) {
+        } catch (ClassNotFoundException e) {
+
         }
+        return accountList;
     }
 
 }

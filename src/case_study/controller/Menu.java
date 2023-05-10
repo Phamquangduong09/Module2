@@ -1,6 +1,6 @@
 package case_study.controller;
 
-import case_study.model.Account;
+
 import case_study.service.AccountManager;
 import case_study.service.BrandManager;
 import case_study.service.CartManager;
@@ -20,7 +20,6 @@ public class Menu {
             System.out.println("---MENU---");
             System.out.println("1 . Login");
             System.out.println("2 . Register");
-            System.out.println("3 . Client");
             System.out.println("Enter your selection");
             try {
                 choice = Integer.parseInt(scanner.nextLine());
@@ -29,14 +28,20 @@ public class Menu {
             }
             switch (choice) {
                 case 1:
-                    accountManager.login();
+                    String result = accountManager.login();
+                    if (result.equals("admin")) {
+                        menuAdmin(scanner, productManager, brandManager,cartManager);
+                    } else if (result != null) {
+                        menuClient(productManager,scanner,cartManager);
+                    }else {
+                        System.out.println("no");
+                    }
                     break;
                 case 2:
                     accountManager.creatNewAccount();
                     break;
-                case 3:
-                    menuClient(productManager, scanner, cartManager);
-                    break;
+                case 0:
+                    System.exit(0);
             }
         } while (true);
     }
@@ -118,6 +123,7 @@ public class Menu {
             System.out.println("1 . Display");
             System.out.println("2 . Shopping");
             System.out.println("3 . Delete Product By Cart");
+            System.out.println("4 . Pay");
             System.out.println("0. Exit");
             System.out.println("Enter your selection");
             try {
@@ -135,18 +141,22 @@ public class Menu {
                 case 3:
                     cartManager.deleteCart();
                     break;
+                case 4:
+                    cartManager.pay();
+                    break;
             }
         } while (choice != 0);
     }
 
-    public static void menuAdmin(Scanner scanner, ProductManager productManager, BrandManager brandManager) {
+    public static void menuAdmin(Scanner scanner, ProductManager productManager, BrandManager brandManager,CartManager cartManager) {
         int choice = -1;
         do {
-            System.out.println("-- Hello Admin --");
+            System.out.println("-- Admin --");
             System.out.println("1 . Add Product");
             System.out.println("2 . Update Product");
             System.out.println("3 . Delete Product");
             System.out.println("4 . Menu Brand");
+            System.out.println("5 . Store Revenue");
             System.out.println("0. Exit");
             System.out.println("Enter your selection");
             try {
@@ -166,6 +176,10 @@ public class Menu {
                     break;
                 case 4:
                     menuBrand(scanner, brandManager);
+                    break;
+                case 5:
+                    cartManager.totalToPay();
+                    break;
             }
         } while (choice != 0);
 

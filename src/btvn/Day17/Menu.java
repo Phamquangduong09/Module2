@@ -81,11 +81,11 @@ public class Menu {
                 if (e.getUsername().equals(username) && e.getPass().equals(password)) {
                     System.out.println("Logged in successfully");
                 } else {
-                    System.out.println("Account or password error");
+                    System.out.println("Account.txt or password error");
                 }
             }
         } else {
-            System.out.println("Account or password error");
+            System.out.println("Account.txt or password error");
         }
 
     }

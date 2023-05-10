@@ -179,7 +179,7 @@ public class ProductManager implements Manager, Feature {
     public void filter() {
         double lowestPrice;
         double highestPrice;
-        String name = "";
+        String name ="";
         do {
             try {
                 System.out.println("Enter Lowest price");
@@ -220,9 +220,9 @@ public class ProductManager implements Manager, Feature {
         for (Product s : productList) {
             if (lowestPrice < s.getPrice() && s.getPrice() < highestPrice) {
                 if(!name.equals("") && s.getBrand().getBrandName().contains(name)){
-                    System.out.println(s);
+                   s.display();
                 }else {
-                    System.out.println(s);
+                   s.display();
                 }
 
             }

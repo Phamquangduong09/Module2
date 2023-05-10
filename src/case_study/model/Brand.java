@@ -1,6 +1,9 @@
 package case_study.model;
 
-public class Brand {
+import java.io.Serializable;
+
+public class Brand implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int id;
     public static int idUp1;
     private String brandName;

@@ -19,7 +19,7 @@ public class CartManager {
         fileManager = new FileManager();
         carts = new ArrayList<>();
         shoppingCarts = new ArrayList<>();
-        fileManager.readFileCart(shoppingCarts);
+        shoppingCarts = fileManager.readFileCart(shoppingCarts);
         this.productManager = productManager;
         checkDefaultIndex();
     }
@@ -42,16 +42,32 @@ public class CartManager {
 
     public void addCart(Product product, int quantity, Cart cart) {
         ShoppingCart s = new ShoppingCart(cart, product, quantity);
-        shoppingCarts.add(s);
+        boolean flag = false;
+        for (ShoppingCart a : shoppingCarts) {
+            if (a.getProduct().getName().equals(product.getName()) && cart.getName().equals(a.getIdCart().getName()) && !a.getIdCart().isPaid()) {
+                a.setQuantity(a.getQuantity() + quantity);
+                flag = true;
+            }
+        }
+        if (!flag) {
+            shoppingCarts.add(s);
+        }
+
+        fileManager.writeFileCart(shoppingCarts);
     }
 
     public void displayCart() {
         double sum = 0;
+        System.out.printf("%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%s",
+                "Id", "UserName", "Date-buy", "id-Pro", "Name-Product", "Brand", "Price", "Description", "Quantity\n");
         for (ShoppingCart s : shoppingCarts) {
-            sum += s.getProduct().getPrice() * s.getQuantity();
-            System.out.println(s);
+            if (!s.getIdCart().isPaid()) {
+                sum += s.getProduct().getPrice() * s.getQuantity();
+                s.display();
+            }
+
         }
-        System.out.println(sum);
+        System.out.println("The total amount you need to pay is : " + sum);
     }
 
     public void deleteCart() {
@@ -85,5 +101,24 @@ public class CartManager {
             Product.idUp = shoppingCarts.get(shoppingCarts.size() - 1).getId();
         }
     }
+
+    public void pay() {
+        for (ShoppingCart shoppingCart : shoppingCarts) {
+            shoppingCart.getIdCart().setPaid(true);
+            System.out.println("Payment success");
+        }
+    }
+
+    public void totalToPay() {
+        double sum = 0;
+        for (ShoppingCart s : shoppingCarts) {
+            if (s.getIdCart().isPaid() == true) {
+                sum += s.getProduct().getPrice();
+                s.display();
+            }
+            System.out.println("Total store revenue is :" + sum);
+        }
+    }
+
 
 }

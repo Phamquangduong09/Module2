@@ -58,4 +58,12 @@ public class ShoppingCart implements Serializable {
     public String toString() {
         return id + "," + idCart + "," + product + "," + quantity;
     }
+    public void display() {
+        System.out.printf("%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%s",
+                this.id, this.idCart.getName(), this.idCart.getDate(),
+                this.product.getId(), this.product.getName(), this.product.getBrand().getBrandName(),
+                this.product.getPrice(), this.product.getDescribe(),
+                this.quantity + "\n");
+    }
+
 }
