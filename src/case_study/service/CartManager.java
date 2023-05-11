@@ -34,9 +34,13 @@ public class CartManager {
         }
         productManager.display();
         Product p = productManager.getById();
-        System.out.println("Enter the product you want to buy");
-        int quantity = Integer.parseInt(scanner.nextLine());
-        addCart(p, quantity, cart);
+        if (p != null) {
+            System.out.println(" Enter the product you want to buy :");
+            int quantity = Integer.parseInt(scanner.nextLine());
+            addCart(p, quantity, cart);
+        }else {
+            System.out.println(" No products !");
+        }
     }
 
     public void addCart(Product product, int quantity, Cart cart) {
@@ -61,7 +65,7 @@ public class CartManager {
         System.out.printf("%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%s",
                 "Id", "UserName", "Date-buy", "id-Pro", "Name-Product", "Brand", "Price", "Description", "Quantity\n");
         for (ShoppingCart s : shoppingCarts) {
-            if (!s.getIdCart().isPaid()){
+            if (!s.getIdCart().isPaid()) {
                 if (userName.equals(s.getIdCart().getName())) {
                     sum += s.getProduct().getPrice() * s.getQuantity();
                     s.display();
@@ -83,6 +87,7 @@ public class CartManager {
             } catch (NumberFormatException e) {
                 System.err.println("Have error, please try again!");
             }
+
         } while (true);
         for (int i = 0; i < shoppingCarts.size(); i++) {
             if (id == shoppingCarts.get(i).getId()) {
